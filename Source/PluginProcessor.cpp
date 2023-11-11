@@ -29,9 +29,9 @@ OldguitaristAudioProcessor::OldguitaristAudioProcessor()
 
     synth.clearVoices();
 
-    for (int i = 0; i < 5; i++) {
+    //for (int i = 0; i < 6; i++) {
         synth.addVoice(new SynthVoice());
-    }
+    //}
 
     synth.clearSounds();
     synth.addSound(new SynthSound());
@@ -148,11 +148,11 @@ void OldguitaristAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    for (int i = 0; i < synth.getNumVoices(); i++) {
-        if ((voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))) {
+    //for (int i = 0; i < synth.getNumVoices(); i++) {
+        //if ((voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))) {
             
-        }
-    }
+        //}
+    //}
 
     buffer.clear();
 

@@ -59,6 +59,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     AudioProcessorValueTreeState treeState;
+
 private:
     Synthesiser synth;
     SynthVoice* voice;
