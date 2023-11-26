@@ -27,7 +27,7 @@ public:
     void startNote(int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override {
         float frequency = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
 
-        if (frequency <= 440.0) {
+        if (frequency < 220.0) {
             c = 2 * frequency * length;
 
             for (int i = 0; i < N; i++) {
@@ -69,7 +69,6 @@ public:
 
                 nextState[i] = t0 * (t1 - t2 + t3 - t4);
             }
-            
 
             float amplitude = 0.0;
             for (int n = 0; n < 10; n++) {
@@ -95,8 +94,8 @@ private:
     float sampleRate = getSampleRate();
 
     float length = 0.6477;
-    float gamma = 0.00005;
-    float stiffness = 0.00005;
+    float gamma = 0.0001;
+    float stiffness = 0.0005;
 
     float dt = 1.0 / sampleRate;
     float dx = length / (N - 1);
