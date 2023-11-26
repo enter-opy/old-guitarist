@@ -26,6 +26,15 @@ OldguitaristAudioProcessor::OldguitaristAudioProcessor()
 #endif
 {
     treeState.state = ValueTree("savedParams");
+
+    synth.clearVoices();
+
+    for (int i = 0; i < 1; i++) {
+        synth.addVoice(new SynthVoice());
+    }
+
+    synth.clearSounds();
+    synth.addSound(new SynthSound());
 }
 
 OldguitaristAudioProcessor::~OldguitaristAudioProcessor()
@@ -97,14 +106,8 @@ void OldguitaristAudioProcessor::changeProgramName (int index, const juce::Strin
 //==============================================================================
 void OldguitaristAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    this->sampleRate = sampleRate;
-
-    length = c / (2 * frequency);
-    gamma = 0.00005;
-    stiffness = 0.00005;
-
-    dx = length / (N - 1);
-    dt = 1.0 / sampleRate;
+    ignoreUnused(samplesPerBlock);
+    synth.setCurrentPlaybackSampleRate(sampleRate);
 
     spec.maximumBlockSize = samplesPerBlock;
     spec.sampleRate = sampleRate;
@@ -152,59 +155,16 @@ void OldguitaristAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-
-    for (const auto midiMessage : midiMessages)
-    {
-        const auto midiEvent = midiMessage.getMessage();
-
-        if (midiEvent.isNoteOn())
-        {
-            frequency = MidiMessage::getMidiNoteInHertz(midiEvent.getNoteNumber()) / 2.0;
-            length = c / (2 * frequency);
-            dx = length / (N - 1);
-
-            copy(begin(initialState), end(initialState), begin(previousState));
-            copy(begin(initialState), end(initialState), begin(currentState));
-        }
-    }
     
     buffer.clear();
 
-    for (int sample = 0; sample < buffer.getNumSamples(); sample++) {
-        if (!midiMessages.isEmpty() && sample == midiMessages.getFirstEventTime()) {
-            copy(begin(initialState), end(initialState), begin(previousState));
-            copy(begin(initialState), end(initialState), begin(currentState));
+    for (int i = 0; i < synth.getNumVoices(); i++) {
+        if ((voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))) {
+            
         }
-
-        fill(std::begin(nextState), std::end(nextState), 0);
-
-        for (int i = 2; i < N - 2; i++) {
-            float t0 = 1.0 / (1.0 / (c * c * dt * dt) + gamma / (2 * dt));
-            float t1 = 1.0 / (dx * dx) * (currentState[i - 1] - 2 * currentState[i] + currentState[i + 1]);
-            float t2 = 1.0 / (c * c * dt * dt) * (previousState[i] - 2 * currentState[i]);
-            float t3 = gamma / (2 * dt) * previousState[i];
-            float t4 = (stiffness * stiffness) / pow(dx, 4) * (currentState[i - 2] - 4 * currentState[i - 1] + 6 * currentState[i] - 4 * currentState[i + 1] + currentState[i + 2]);
-
-            nextState[i] = t0 * (t1 - t2 + t3 - t4);
-        }
-
-        amplitude = 0.0;
-        for (int n = 0; n < 10; n++) {
-            for (int i = 0; i < N; i++) {
-                amplitude += currentState[i] * sin(n * float_Pi * i / N);
-            }
-        }
-        
-        amplitude /= N;
-
-
-        for (int channel = 0; channel < buffer.getNumChannels(); channel++) {
-            buffer.addSample(channel, sample, amplitude);
-        }
-
-        copy(std::begin(currentState), end(currentState), begin(previousState));
-        copy(std::begin(nextState), end(nextState), begin(currentState));
     }
+
+    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
     dsp::AudioBlock<float> block {buffer};
 
