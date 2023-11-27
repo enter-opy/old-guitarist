@@ -70,16 +70,7 @@ public:
                 nextState[i] = t0 * (t1 - t2 + t3 - t4);
             }
 
-            float amplitude = 0.0;
-            for (int n = 0; n < 10; n++) {
-                for (int i = 0; i < N; i++) {
-                    amplitude += currentState[i] * sin(n * float_Pi * i / N);
-                }
-            }
-
-            amplitude /= N;
-
-            //DBG(amplitude);
+            float amplitude = currentState[(int) N / 2];
 
             for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++) {
                 outputBuffer.addSample(channel, sample, amplitude);

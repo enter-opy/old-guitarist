@@ -28,10 +28,7 @@ OldguitaristAudioProcessor::OldguitaristAudioProcessor()
     treeState.state = ValueTree("savedParams");
 
     synth.clearVoices();
-
-    for (int i = 0; i < 1; i++) {
-        synth.addVoice(new SynthVoice());
-    }
+    synth.addVoice(new SynthVoice());
 
     synth.clearSounds();
     synth.addSound(new SynthSound());
