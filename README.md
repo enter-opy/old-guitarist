@@ -9,7 +9,10 @@
 </p>
 
 ## TODOs
-[ ] Wave equation
+- [x] Wave equation
+- [ ] Stability condition
+- [ ] Multiple Strings
+- [x] IR Convolution
 
 ## Installation
 ### VST3 Installation (Windows)
