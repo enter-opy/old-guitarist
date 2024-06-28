@@ -1,6 +1,6 @@
 <h1>Old Guitarist</h2>
 
-<center><img src="res/Screenshot.png" width="300"></center>
+<p align="center"><img src="res/Screenshot.png" width="300"></p>
 
 <br>
 
