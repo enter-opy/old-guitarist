@@ -91,10 +91,6 @@ An impulse response of an actual guitar is convoluted with the signal to introdu
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
-<audio controls>
-  <source src="Source\Assets\impulse_response.wav" type="audio/wav">
-</audio>
-
 Instead of multiplication in frequency domain ($Y=XH$), same result can be achieved by convolution ($y=x*h$) in time domain. The formula for convolution is given as:
 
 $$
