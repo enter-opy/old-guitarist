@@ -72,8 +72,6 @@ $$
 - $i$: Position along the string ($\Delta x$)
 - $m$: Time step ($\Delta t$)
 
-&nbsp;&nbsp;&nbsp;&nbsp; $y_{i}$ is sampled at each time step $m$ at $i=L/2$ for audio generation.
-
 ### Stability condition
 The stability analysis of finite difference schemes when applied to the numerical solution of partial differential equations is intricately tied to the Courant–Friedrichs–Lewy (CFL) condition, expressed as:
 
@@ -89,22 +87,20 @@ $$
 
 ### Convolution with Impulse Response
 
-An impulse response of an actual guitar is convoluted with the signal to introduce body resonance.
+&nbsp;&nbsp;&nbsp;&nbsp; $y$ is sampled at each time step $t$ at $i=L/2$. An impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
-&nbsp;&nbsp;&nbsp;&nbsp;Instead of multiplication in frequency domain ($Y=XH$), same result can be achieved by convolution ($y=x*h$) in time domain. The formula for convolution is given as:
+&nbsp;&nbsp;&nbsp;&nbsp;Instead of multiplication ($YH$) in frequency domain, same result can be achieved by convolution ($y*h$) in time domain. The formula for convolution is given as:
 
 $$
-(x * h)(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
+(y * h)(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
 $$
 
-- $x$: Input signal
+- $y$: Input signal
 - $h$: Impulse response
-- $y$: Output signal
-- $X$: Input signal's fourier transform
+- $Y$: Input signal's fourier transform
 - $H$: Impulse response's fourier transform
-- $Y$: Output signal's fourier transform
 
 ## Installation
 ### VST3 Installation (Windows)
