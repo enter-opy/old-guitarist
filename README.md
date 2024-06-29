@@ -18,10 +18,12 @@
 ## Physical Model
 
 ### Wave equation
-Wave equation for a guitar string is given as
+Wave equation for a guitar string is given as:
 
 $$
+\begin{align*}
 \frac{\partial^2 y}{\partial t^2} = \frac{T(t)}{\mu} \frac{\partial^2 y}{\partial x^2} - 2\sigma_0 \frac{\partial y}{\partial t} + \sigma_1 \frac{\partial}{\partial t}\left(\frac{\partial^2 y}{\partial x^2}\right) + EI \frac{\partial^4 y}{\partial x^4}
+\end{align*}
 $$
 <br>
 
@@ -34,7 +36,9 @@ $$
 
 ### Boundary Condition
 $$
+\begin{align*}
 y(0, t) = y(L, t) = 0
+\end{align*}
 $$
 
 - $ L $: Length of the string
@@ -43,24 +47,66 @@ $$
 Consider the expression given by
 
 $$
+\begin{align*}
 f' = \lim_{{h \to 0}} \frac{{f(x + h) - f(x)}}{h}
+\end{align*}
 $$
 
 In the context of the finite difference method, $ h $ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $ h $ approaches zero, a small but finite value of $ h $ is chosen.
 
-The wave equation is discretized to obtain the following form.
+The wave equation is discretized to obtain the following form with $ \text{Spatial resolution} = \frac{1}{\Delta x} $ and $ \text{Spatial resolution} = \frac{1}{\Delta x} $.
 
 $$
-y_{i}^{m+1} =  (1 + \Delta x \sigma_0)^{-1} 2y_{i}^{m} - y_{i}^{(m-1)} + \frac{T(t)}{\mu} \frac{\Delta t^2}{\Delta x^2} y_{i-1}^{m} - 2y_{i}^{m} + y_{i+1}^{m} 
+\begin{align*}
+\begin{split}
+y_{i}^{m+1} = &\ (1 + \Delta x \sigma_0)^{-1} \bigg(2y_{i}^{m} - y_{i}^{m-1} \frac{T(t)}{\mu} \frac{\Delta t^2}{\Delta x^2} \left(y_i-1^{m} - 2y_{i}^{m} + y_{i+1}^{m}\right) \\
+& - E I \frac{\Delta t^2}{\Delta x^4} \left(y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m}\right) \\
+& + \Delta t \sigma_0 y_{i}^{m-1} \\
+& + \sigma_1 \frac{\Delta t}{\Delta x^2} \left(y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{m-1} + 2y_{i}^{m-1} - y_{i-1}^{m-1}\right) \bigg)
+\end{split}
+\end{align*}
+$$
+
+- $ i $: Position along the string ($ \Delta x $)
+- $ m $: Time step ($ \Delta t $)
+
+$ y_{i} $ is sampled at each time step $ m $ at $ i = L / 2 $ for audio generation.
+
+### Stability condition
+The stability analysis of finite difference schemes when applied to the numerical solution of partial differential equations is intricately tied to the Courant–Friedrichs–Lewy (CFL) condition, expressed as:
+
+$$
+\begin{align*}
+C = \sqrt{\frac{\mu}{T}} \frac{\Delta x}{\Delta t} \leq C_{\text{max}}
+\end{align*}
 $$
 
 $$
-- E I \frac{\Delta t^2}{\Delta x^4} y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m} 
+\text{Spatial Resolution} \leq \text{Temporal Resolution} \times \sqrt{\frac{\mu}{T}}
 $$
 
+### Convolution with Impulse Response
+
+An impulse response of an actual guitar is convoluted with the signal to introduce body resonance.
+
+**Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
+
+<audio controls>
+  <source src="Source\Assets\impulse_response.wav" type="audio/wav">
+</audio>
+
+Instead of multiplication in frequency domain ($ Y = XH $), same result can be achieved by convolution ($ y = x * h $) in time domain. The formula for convolution is given as:
+
 $$
-+ \Delta t \sigma_0 y_{i}^{(m-1)} + \sigma_1 \frac{\Delta t}{\Delta x^2} y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{(m-1)} + 2y_{i}^{(m-1)} - y_{i-1}^{(m-1)}
+(x * h)(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
 $$
+
+- $ x $: Input signal
+- $ h $: Impulse response
+- $ y $: Output signal
+- $ X $: Input signal's fourier transform
+- $ H $: Impulse response's fourier transform
+- $ Y $: Output signal's fourier transform
 
 ## Installation
 ### VST3 Installation (Windows)
