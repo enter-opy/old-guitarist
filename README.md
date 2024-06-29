@@ -56,7 +56,7 @@ $$
 
 &nbsp;&nbsp;&nbsp;&nbsp;In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
 
-The wave equation is discretized to obtain the following form with `Spatial resolution`$= \frac{1}{\Delta x}$ and `Spatial resolution` $= \frac{1}{\Delta x}$:
+&nbsp;&nbsp;&nbsp;&nbsp;The wave equation is discretized to obtain the following form with `Spatial resolution`$= \frac{1}{\Delta x}$ and `Spatial resolution` $= \frac{1}{\Delta x}$:
 
 $$
 \begin{align*}
@@ -72,7 +72,7 @@ $$
 - $i$: Position along the string ($\Delta x$)
 - $m$: Time step ($\Delta t$)
 
-$y_{i}$ is sampled at each time step $m$ at $i=L/2$ for audio generation.
+&nbsp;&nbsp;&nbsp;&nbsp;$y_{i}$ is sampled at each time step $m$ at $i=L/2$ for audio generation.
 
 ### Stability condition
 The stability analysis of finite difference schemes when applied to the numerical solution of partial differential equations is intricately tied to the Courant–Friedrichs–Lewy (CFL) condition, expressed as:
@@ -93,7 +93,7 @@ An impulse response of an actual guitar is convoluted with the signal to introdu
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
-Instead of multiplication in frequency domain ($Y=XH$), same result can be achieved by convolution ($y=x*h$) in time domain. The formula for convolution is given as:
+&nbsp;&nbsp;&nbsp;&nbsp;Instead of multiplication in frequency domain ($Y=XH$), same result can be achieved by convolution ($y=x*h$) in time domain. The formula for convolution is given as:
 
 $$
 (x * h)(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
