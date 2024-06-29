@@ -8,11 +8,53 @@
     Old guitarist is a physically modeled virtual guitar plugin.
 </p>
 
-## TODOs
+## Features
 - [x] Wave equation
 - [ ] Stability condition
 - [ ] Multiple Strings
 - [x] IR Convolution
+- [ ] Time-varying tension factor
+
+## Physical Model
+
+### Wave equation
+Wave equation for a guitar string is given as
+
+$$
+\frac{\partial^2 y}{\partial t^2} = \frac{T(t)}{\mu} \frac{\partial^2 y}{\partial x^2} - 2\sigma_0 \frac{\partial y}{\partial t} + \sigma_1 \frac{\partial}{\partial t}\left(\frac{\partial^2 y}{\partial x^2}\right) + EI \frac{\partial^4 y}{\partial x^4}
+$$
+<br>
+
+- $ T(t) $: tension of the string at time $ t $
+- $ \mu $: linear density of the string
+- $ \sigma_0 $: frequency-independent damping factor
+- $ \sigma_1 $: frequency-dependent damping factor
+- $ E $: Young's modulus of the string material
+- $ I $: second moment of area ($ \frac{\pi r^4}{4} $ for a cylinder)
+
+### Boundary Condition
+$$
+y(0, t) = y(L, t) = 0
+$$
+
+- $ L $: Length of the string
+
+### Finite Difference
+Consider the expression given by
+
+$$
+f' = \lim_{{h \to 0}} \frac{{f(x + h) - f(x)}}{h}
+$$
+
+In the context of the finite difference method, $ h $ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $ h $ approaches zero, a small but finite value of $ h $ is chosen.
+
+The wave equation is discretized to obtain the following form.
+
+$$
+y_{i}^{(m+1)} = & {(1 + \Delta x \sigma_0)^{-1}} \left(2y_{i}^{m} - y_{i}^{(m-1)} + \frac{T(t)}{\mu} \frac{\Delta t^2}{\Delta x^2} \left(y_{i-1}^{m} - 2y_{i}^{m} + y_{i+1}^{m}\right) \\
+& - E I \frac{\Delta t^2}{\Delta x^4} \left(y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m}\right) \\
+& + \Delta t \sigma_0 y_{i}^{(m-1)} + \sigma_1 \frac{\Delta t}{\Delta x^2} \left(y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{(m-1)} + 2y_{i}^{(m-1)} - y_{i-1}^{(m-1)}\right)\right)
+$$
 
 ## Installation
 ### VST3 Installation (Windows)
