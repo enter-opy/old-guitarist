@@ -27,12 +27,12 @@ $$
 $$
 <br>
 
-- $T(t)$: tension of the string at time $ t $
+- $T(t)$: tension of the string at time $t$
 - $\mu$: linear density of the string
 - $\sigma_0$: frequency-independent damping factor
-- $ \sigma_1 $: frequency-dependent damping factor
-- $ E $: Young's modulus of the string material
-- $ I $: second moment of area ($ \frac{\pi r^4}{4} $ for a cylinder)
+- $\sigma_1$: frequency-dependent damping factor
+- $E$: Young's modulus of the string material
+- $I$: second moment of area ($\frac{\pi r^4}{4}$ for a cylinder)
 
 ### Boundary Condition
 $$
@@ -41,7 +41,7 @@ y(0, t) = y(L, t) = 0
 \end{align*}
 $$
 
-- $ L $: Length of the string
+- $L$: Length of the string
 
 ### Finite Difference
 Consider the expression given by
@@ -52,9 +52,9 @@ f' = \lim_{{h \to 0}} \frac{{f(x + h) - f(x)}}{h}
 \end{align*}
 $$
 
-In the context of the finite difference method, $ h $ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $ h $ approaches zero, a small but finite value of $ h $ is chosen.
+In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
 
-The wave equation is discretized to obtain the following form with $ \text{Spatial resolution} = \frac{1}{\Delta x} $ and $ \text{Spatial resolution} = \frac{1}{\Delta x} $.
+The wave equation is discretized to obtain the following form with $\text{Spatial resolution} = \frac{1}{\Delta x}$ and $\text{Spatial resolution} = \frac{1}{\Delta x}$.
 
 $$
 \begin{align*}
@@ -67,10 +67,10 @@ y_{i}^{m+1} = &\ (1 + \Delta x \sigma_0)^{-1} \bigg(2y_{i}^{m} - y_{i}^{m-1} \fr
 \end{align*}
 $$
 
-- $ i $: Position along the string ($ \Delta x $)
-- $ m $: Time step ($ \Delta t $)
+- $i$: Position along the string ($\Delta x$)
+- $m$: Time step ($\Delta t$)
 
-$ y_{i} $ is sampled at each time step $ m $ at $ i = L / 2 $ for audio generation.
+$y_{i}$ is sampled at each time step $m$ at $i=L/2$ for audio generation.
 
 ### Stability condition
 The stability analysis of finite difference schemes when applied to the numerical solution of partial differential equations is intricately tied to the Courant–Friedrichs–Lewy (CFL) condition, expressed as:
@@ -95,18 +95,18 @@ An impulse response of an actual guitar is convoluted with the signal to introdu
   <source src="Source\Assets\impulse_response.wav" type="audio/wav">
 </audio>
 
-Instead of multiplication in frequency domain ($ Y = XH $), same result can be achieved by convolution ($ y = x * h $) in time domain. The formula for convolution is given as:
+Instead of multiplication in frequency domain ($Y=XH$), same result can be achieved by convolution ($y=x*h$) in time domain. The formula for convolution is given as:
 
 $$
 (x * h)(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
 $$
 
-- $ x $: Input signal
-- $ h $: Impulse response
-- $ y $: Output signal
-- $ X $: Input signal's fourier transform
-- $ H $: Impulse response's fourier transform
-- $ Y $: Output signal's fourier transform
+- $x$: Input signal
+- $h$: Impulse response
+- $y$: Output signal
+- $X$: Input signal's fourier transform
+- $H$: Impulse response's fourier transform
+- $Y$: Output signal's fourier transform
 
 ## Installation
 ### VST3 Installation (Windows)
