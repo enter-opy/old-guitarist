@@ -27,9 +27,9 @@ $$
 $$
 <br>
 
-- $ T(t) $: tension of the string at time $ t $
-- $ \mu $: linear density of the string
-- $ \sigma_0 $: frequency-independent damping factor
+- $T(t)$: tension of the string at time $ t $
+- $\mu$: linear density of the string
+- $\sigma_0$: frequency-independent damping factor
 - $ \sigma_1 $: frequency-dependent damping factor
 - $ E $: Young's modulus of the string material
 - $ I $: second moment of area ($ \frac{\pi r^4}{4} $ for a cylinder)
