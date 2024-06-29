@@ -56,7 +56,7 @@ $$
 
 In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
 
-The wave equation is discretized to obtain the following form with $\text{Spatial resolution} = \frac{1}{\Delta x}$ and $\text{Spatial resolution} = \frac{1}{\Delta x}$.
+The wave equation is discretized to obtain the following form with `Spatial resolution`$= \frac{1}{\Delta x}$ and `Spatial resolution` $= \frac{1}{\Delta x}$:
 
 $$
 \begin{align*}
