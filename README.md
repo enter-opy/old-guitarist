@@ -51,9 +51,9 @@ In the context of the finite difference method, $ h $ is a finite interval, and 
 The wave equation is discretized to obtain the following form.
 
 $$
-y_{i}^{(m+1)} = & {(1 + \Delta x \sigma_0)^{-1}} \left(2y_{i}^{m} - y_{i}^{(m-1)} + \frac{T(t)}{\mu} \frac{\Delta t^2}{\Delta x^2} \left(y_{i-1}^{m} - 2y_{i}^{m} + y_{i+1}^{m}\right) \\
-& - E I \frac{\Delta t^2}{\Delta x^4} \left(y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m}\right) \\
-& + \Delta t \sigma_0 y_{i}^{(m-1)} + \sigma_1 \frac{\Delta t}{\Delta x^2} \left(y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{(m-1)} + 2y_{i}^{(m-1)} - y_{i-1}^{(m-1)}\right)\right)
+y_{i}^{m+1} =  (1 + \Delta x \sigma_0)^{-1} 2y_{i}^{m} - y_{i}^{(m-1)} + \frac{T(t)}{\mu} \frac{\Delta t^2}{\Delta x^2} y_{i-1}^{m} - 2y_{i}^{m} + y_{i+1}^{m} \\
+- E I \frac{\Delta t^2}{\Delta x^4} y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m} \\
++ \Delta t \sigma_0 y_{i}^{(m-1)} + \sigma_1 \frac{\Delta t}{\Delta x^2} y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{(m-1)} + 2y_{i}^{(m-1)} - y_{i-1}^{(m-1)}
 $$
 
 ## Installation
