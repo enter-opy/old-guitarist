@@ -55,7 +55,11 @@ y_{i}^{m+1} =  (1 + \Delta x \sigma_0)^{-1} 2y_{i}^{m} - y_{i}^{(m-1)} + \frac{T
 $$
 
 $$
-- E I \frac{\Delta t^2}{\Delta x^4} y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m} + \Delta t \sigma_0 y_{i}^{(m-1)} + \sigma_1 \frac{\Delta t}{\Delta x^2} y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{(m-1)} + 2y_{i}^{(m-1)} - y_{i-1}^{(m-1)}
+- E I \frac{\Delta t^2}{\Delta x^4} y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m} 
+$$
+
+$$
++ \Delta t \sigma_0 y_{i}^{(m-1)} + \sigma_1 \frac{\Delta t}{\Delta x^2} y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{(m-1)} + 2y_{i}^{(m-1)} - y_{i-1}^{(m-1)}
 $$
 
 ## Installation
