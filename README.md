@@ -54,7 +54,7 @@ f' = \lim_{{h \to 0}} \frac{{f(x + h) - f(x)}}{h}
 \end{align*}
 $$
 
-In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
+&nbsp;&nbsp;&nbsp;&nbsp;In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
 
 The wave equation is discretized to obtain the following form with `Spatial resolution`$= \frac{1}{\Delta x}$ and `Spatial resolution` $= \frac{1}{\Delta x}$:
 
