@@ -14,6 +14,8 @@
 - [ ] Multiple Strings
 - [x] IR Convolution
 - [ ] Time-varying tension factor
+- [ ] Hammer-ons
+- [ ] Slides
 
 ## Physical Model
 
