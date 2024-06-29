@@ -72,7 +72,7 @@ $$
 - $i$: Position along the string ($\Delta x$)
 - $m$: Time step ($\Delta t$)
 
-&nbsp;&nbsp;&nbsp;&nbsp;$y_{i}$ is sampled at each time step $m$ at $i=L/2$ for audio generation.
+&nbsp;&nbsp;&nbsp;&nbsp; $y_{i}$ is sampled at each time step $m$ at $i=L/2$ for audio generation.
 
 ### Stability condition
 The stability analysis of finite difference schemes when applied to the numerical solution of partial differential equations is intricately tied to the Courant–Friedrichs–Lewy (CFL) condition, expressed as:
