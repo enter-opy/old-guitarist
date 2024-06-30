@@ -69,7 +69,7 @@ $$
 
 &nbsp;&nbsp;&nbsp;&nbsp;In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
 
-&nbsp;&nbsp;&nbsp;&nbsp;The wave equation is discretized to obtain the following form:
+The wave equation is discretized to obtain the following form:
 
 $$
 \begin{align*}
@@ -104,9 +104,7 @@ $$
 
 ### Convolution with Impulse Response
 
-&nbsp;&nbsp;&nbsp;&nbsp; $y^{t}$ is sampled for $ x \in (0, l)$. Then tone may differ for a different x.
-
-&nbsp;&nbsp;&nbsp;&nbsp;An impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
+&nbsp;&nbsp;&nbsp;&nbsp; $y^{t}$ is sampled for $ x \in (0, l)$. Then tone may differ with respect to x. Additionally, an impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
