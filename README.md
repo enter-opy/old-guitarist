@@ -69,11 +69,23 @@ $$
 
 &nbsp;&nbsp;&nbsp;&nbsp;In the context of the finite difference method, $h$ is a finite interval, and the difference quotient is used to approximate the derivative. Instead of taking the limit as $h$ approaches zero, a small but finite value of $h$ is chosen.
 
-&nbsp;&nbsp;&nbsp;&nbsp;The wave equation is discretized to obtain the following form with `Spatial resolution`$= \frac{1}{\Delta x}$ and `Spatial resolution` $= \frac{1}{\Delta x}$:
+&nbsp;&nbsp;&nbsp;&nbsp;The wave equation is discretized to obtain the following form:
 
 $$
 \begin{align*}
 \frac{y_{x+1}^{t} - 2y_{x}^{t} + y_{x-1}^{t}}{\Delta x^2} - \frac{\mu}{T(t)}\frac{y_{x}^{t+1} - 2y_{x}^{t} + y_{x}^{t-1}}{\Delta t^2}- \gamma \frac{y_{x}^{t+1} - y_{x}^{t-1}}{2 \Delta t} - EI \frac{y_{x-2}^{t} -4y_{x-1}^{t} + 4y_{x}^{t} - 4y_{x+1}^{t} + y_{x+2}^{t}}{\Delta x^4} = 0 
+\end{align*}
+$$
+
+$$
+\begin{align*}
+Spatial resolution = \frac{1}{\Delta x}
+\end{align*}
+$$
+
+$$
+\begin{align*}
+Temporal resolution = \frac{1}{\Delta t}
 \end{align*}
 $$
 
