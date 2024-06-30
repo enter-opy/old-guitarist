@@ -19,31 +19,44 @@
 
 ## Physical Model
 
+### Nomenclature
+
+- $\gamma$: damping factor
+- $\mu$: linear density of the string
+- $E$: Young's modulus of the string material
+- $h$: Impulse response
+- $I$: second moment of area ($\frac{\pi r^4}{4}$ for a cylinder)
+- $l$: length of the string
+- $T$: tension
+- $t$: time
+- $x$: position
+
 ### Wave equation
 Wave equation for a guitar string is given as:
 
 $$
 \begin{align*}
-\frac{\partial^2 y}{\partial t^2} = \frac{T(t)}{\mu} \frac{\partial^2 y}{\partial x^2} - 2\sigma_0 \frac{\partial y}{\partial t} + \sigma_1 \frac{\partial}{\partial t}\left(\frac{\partial^2 y}{\partial x^2}\right) + EI \frac{\partial^4 y}{\partial x^4}
+\frac{\partial^2 y}{\partial x^2} - \frac{\mu}{T(t)} \frac{\partial^2 y}{\partial t^2} - \gamma \frac{\partial y}{\partial t} - EI \frac{\partial^4 y}{\partial x^4} = 0
 \end{align*}
 $$
-<br>
 
-- $T(t)$: tension of the string at time $t$
-- $\mu$: linear density of the string
-- $\sigma_0$: frequency-independent damping factor
-- $\sigma_1$: frequency-dependent damping factor
-- $E$: Young's modulus of the string material
-- $I$: second moment of area ($\frac{\pi r^4}{4}$ for a cylinder)
+### Initial and Boundary Condition
 
-### Boundary Condition
 $$
 \begin{align*}
-y(0, t) = y(L, t) = 0
+y(x, 0) =
+\begin{cases} 
+\frac{4x}{l} & \text{for } 0 \leq x < \frac{l}{4} \\
+\frac{4 (l - x)}{3l} & \text{for } \frac{l}{4} \leq x \leq l
+\end{cases}
 \end{align*}
 $$
 
-- $L$: Length of the string
+$$
+\begin{align*}
+y(0, t) = y(l, t) = 0
+\end{align*}
+$$
 
 ### Finite Difference
 Consider the expression given by
@@ -61,16 +74,13 @@ $$
 $$
 \begin{align*}
 \begin{split}
-y_{i}^{m+1} = &\ (1 + \Delta x \sigma_0)^{-1} \bigg(2y_{i}^{m} - y_{i}^{m-1} \frac{T(t)}{\mu} \frac{\Delta t^2}{\Delta x^2} \left(y_i-1^{m} - 2y_{i}^{m} + y_{i+1}^{m}\right) \\
-& - E I \frac{\Delta t^2}{\Delta x^4} \left(y_{i+2}^{m} - 4y_{i+1}^{m} + 6y_{i}^{m} - 4y_{i-1}^{m} + y_{i-2}^{m}\right) \\
-& + \Delta t \sigma_0 y_{i}^{m-1} \\
-& + \sigma_1 \frac{\Delta t}{\Delta x^2} \left(y_{i+1}^{m} - 2y_{i}^{m} + y_{i-1}^{m} - y_{i+1}^{m-1} + 2y_{i}^{m-1} - y_{i-1}^{m-1}\right) \bigg)
+\frac{y_{x+1}^{t} - 2y_{x}^{t} + y_{x-1}^{t}}{\Delta x^2} 
+- \frac{\mu}{T(t)}\frac{y_{x}^{t+1} - 2y_{x}^{t} + y_{x}^{t-1}}{\Delta t^2}
+- \gamma \frac{y_{x}^{t+1} - y_{x}^{t-1}}{2 \Delta t} \\
+- EI \frac{y_{x-2}^{t} -4y_{x-1}^{t} + 4y_{x}^{t} - 4y_{x+1}^{t} + y_{x+2}^{t}}{\Delta x^4} =0 
 \end{split}
 \end{align*}
 $$
-
-- $i$: Position along the string ($\Delta x$)
-- $m$: Time step ($\Delta t$)
 
 ### Stability condition
 The stability analysis of finite difference schemes when applied to the numerical solution of partial differential equations is intricately tied to the Courant–Friedrichs–Lewy (CFL) condition, expressed as:
@@ -87,7 +97,7 @@ $$
 
 ### Convolution with Impulse Response
 
-&nbsp;&nbsp;&nbsp;&nbsp; $y$ is sampled at each time step $t$ at $i=L/2$. An impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
+&nbsp;&nbsp;&nbsp;&nbsp; $y$ is sampled at each time step $t$ at $i=l/2$. An impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
@@ -97,19 +107,7 @@ $$
 (y * h)(t) = \int_{-\infty}^{\infty} x(\tau) h(t - \tau) \, d\tau
 $$
 
-- $y$: Input signal
-- $h$: Impulse response
-- $Y$: Input signal's fourier transform
-- $H$: Impulse response's fourier transform
-
 ## Installation
-### VST3 Installation (Windows)
-
-1. **Download the Plugin:** Download old.guitarist.vst3 from [releases](https://github.com/enter-opy/old-guitarist/releases).
-
-2. **Install the Plugin:**
-   - **Copy the file into your DAW's plugin directory.**
-   - **Rescan Plugins:** Follow your DAW's instructions to rescan plugins or manually add the plugin if necessary.
 
 ### Build from Source
 To build Old guitarist from source:
