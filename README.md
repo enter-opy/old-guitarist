@@ -22,11 +22,11 @@
 ### Nomenclature
 
 - $\gamma$: damping factor
-- $\mu$: linear density of the string
-- $E$: Young's modulus of the string material
+- $\mu$: linear density
+- $E$: Young's modulus
 - $h$: Impulse response
 - $I$: second moment of area ($\frac{\pi r^4}{4}$ for a cylinder)
-- $l$: length of the string
+- $l$: length
 - $T$: tension
 - $t$: time
 - $x$: position
