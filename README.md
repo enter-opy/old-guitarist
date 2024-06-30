@@ -99,7 +99,7 @@ C = \sqrt{\frac{\mu}{T}} \frac{\Delta x}{\Delta t} \leq C_{\text{max}}
 $$
 
 $$
-\text{Spatial Resolution} \leq \text{Temporal Resolution} \times \sqrt{\frac{\mu}{T}}
+Spatial Resolution \leq Temporal Resolution \times \sqrt{\frac{\mu}{T}}
 $$
 
 ### Convolution with Impulse Response
