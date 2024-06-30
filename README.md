@@ -79,13 +79,13 @@ $$
 
 $$
 \begin{align*}
-Spatial resolution = \frac{1}{\Delta x}
+Spatial \space resolution = \frac{1}{\Delta x}
 \end{align*}
 $$
 
 $$
 \begin{align*}
-Temporal resolution = \frac{1}{\Delta t}
+Temporal \space resolution = \frac{1}{\Delta t}
 \end{align*}
 $$
 
@@ -99,12 +99,14 @@ C = \sqrt{\frac{\mu}{T}} \frac{\Delta x}{\Delta t} \leq C_{\text{max}}
 $$
 
 $$
-Spatial Resolution \leq Temporal Resolution \times \sqrt{\frac{\mu}{T}}
+Spatial \space resolution \leq Temporal \space resolution \times \sqrt{\frac{\mu}{T}}
 $$
 
 ### Convolution with Impulse Response
 
-&nbsp;&nbsp;&nbsp;&nbsp; $y$ is sampled at each time step $t$ at $i=l/2$. An impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
+&nbsp;&nbsp;&nbsp;&nbsp; $y^{t}$ is sampled for $ x \in (0, l)$. Then tone may differ for a different x.
+
+&nbsp;&nbsp;&nbsp;&nbsp;An impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
