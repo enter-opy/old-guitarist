@@ -104,7 +104,7 @@ $$
 
 ### Convolution with Impulse Response
 
-&nbsp;&nbsp;&nbsp;&nbsp; $y^{t}$ is sampled for $x \in (0, l)$. The tone may differ with respect to x. Additionally, an impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
+&nbsp;&nbsp;&nbsp;&nbsp; $y^{t}$ is sampled for $x \in (0, l)$. The tone may vary with respect to x. Additionally, an impulse response of a guitar body is convoluted with $y$ to introduce body resonance.
 
 **Impulse response:** [Source](https://ccrma.stanford.edu/~jiffer8/420/project.html)
 
