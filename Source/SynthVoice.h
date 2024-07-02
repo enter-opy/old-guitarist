@@ -32,6 +32,8 @@ public:
         if (frequency < 220.0) {
             c = 2 * frequency * length;
 
+            dc = 15;
+
             for (int i = 0; i < numNodes; i++) {
 
                 float x = i * dx;
@@ -62,29 +64,33 @@ public:
 
     void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override {
         
-        /*for (int sample = startSample; sample < numSamples; sample++) {
+        for (int sample = startSample; sample < numSamples; sample++) {
 
             fill(std::begin(nextState), std::end(nextState), 0);
 
             for (int i = 2; i < numNodes - 2; i++) {
-                float t0 = 1.0 / (1.0 / (c * c * dt * dt) + gamma / (2 * dt));
+                float t0 = 1.0 / (1.0 / ((c + dc) * (c + dc) * dt * dt) + gamma / (2 * dt));
                 float t1 = 1.0 / (dx * dx) * (currentState[i - 1] - 2 * currentState[i] + currentState[i + 1]);
-                float t2 = 1.0 / (c * c * dt * dt) * (previousState[i] - 2 * currentState[i]);
+                float t2 = 1.0 / ((c + dc) * (c + dc) * dt * dt) * (previousState[i] - 2 * currentState[i]);
                 float t3 = gamma / (2 * dt) * previousState[i];
                 float t4 = (stiffness * stiffness) / pow(dx, 4) * (currentState[i - 2] - 4 * currentState[i - 1] + 6 * currentState[i] - 4 * currentState[i + 1] + currentState[i + 2]);
 
                 nextState[i] = t0 * (t1 - t2 + t3 - t4);
+
+                if (dc > 0) {
+                    dc -= 100 * dt;
+                }
             }
 
             float amplitude = currentState[(int)numNodes / 2];
 
             for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++) {
-                outputBuffer.addSample(channel, sample, amplitude);
+                outputBuffer.addSample(channel, sample, amplitude * 2);
             }
 
             copy(std::begin(currentState), end(currentState), begin(previousState));
             copy(std::begin(nextState), end(nextState), begin(currentState));
-        }*/
+        }
     }
 
     static const int numNodes = 101;
@@ -104,6 +110,7 @@ private:
     float dx = length / (numNodes - 1);
 
     float c = 308;
+    float dc;
 
     float yElongation = 0.5;
     float xPluck = length / 4;
