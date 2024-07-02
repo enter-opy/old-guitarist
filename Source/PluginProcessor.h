@@ -62,10 +62,10 @@ public:
 
     AudioProcessorValueTreeState treeState;
 
-private:
     Synthesiser synth;
     SynthVoice* voice;
 
+private:
     dsp::ProcessSpec spec;
     dsp::Convolution convolution;
 

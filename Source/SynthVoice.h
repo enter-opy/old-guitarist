@@ -15,8 +15,6 @@
 
 using namespace std;
 
-#define N 101
-
 class SynthVoice :public SynthesiserVoice {
 public:
 
@@ -27,14 +25,22 @@ public:
     void startNote(int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override {
         float frequency = MidiMessage::getMidiNoteInHertz(midiNoteNumber);
 
+        float dyLeft = yElongation / xPluck;
+        float dyRight = yElongation / (length - xPluck);
+
+
         if (frequency < 220.0) {
             c = 2 * frequency * length;
 
-            for (int i = 0; i < N; i++) {
-                currentState[i] = i * dx;
+            for (int i = 0; i < numNodes; i++) {
 
-                if (currentState[i] > 1.0) {
-                    currentState[i] = 2.0 - currentState[i];
+                float x = i * dx;
+
+                if (x < xPluck) {
+                    currentState[i] = dyLeft * x;
+                }
+                else {
+                    currentState[i] = dyRight * (length - x);
                 }
             }
 
@@ -56,11 +62,11 @@ public:
 
     void renderNextBlock(AudioBuffer<float>& outputBuffer, int startSample, int numSamples) override {
         
-        for (int sample = startSample; sample < numSamples; sample++) {
+        /*for (int sample = startSample; sample < numSamples; sample++) {
 
             fill(std::begin(nextState), std::end(nextState), 0);
 
-            for (int i = 2; i < N - 2; i++) {
+            for (int i = 2; i < numNodes - 2; i++) {
                 float t0 = 1.0 / (1.0 / (c * c * dt * dt) + gamma / (2 * dt));
                 float t1 = 1.0 / (dx * dx) * (currentState[i - 1] - 2 * currentState[i] + currentState[i + 1]);
                 float t2 = 1.0 / (c * c * dt * dt) * (previousState[i] - 2 * currentState[i]);
@@ -70,7 +76,7 @@ public:
                 nextState[i] = t0 * (t1 - t2 + t3 - t4);
             }
 
-            float amplitude = currentState[(int) N / 2];
+            float amplitude = currentState[(int)numNodes / 2];
 
             for (int channel = 0; channel < outputBuffer.getNumChannels(); channel++) {
                 outputBuffer.addSample(channel, sample, amplitude);
@@ -78,10 +84,16 @@ public:
 
             copy(std::begin(currentState), end(currentState), begin(previousState));
             copy(std::begin(nextState), end(nextState), begin(currentState));
-        }
+        }*/
     }
 
+    static const int numNodes = 101;
+    float previousState[numNodes] = { 0 };
+    float currentState[numNodes] = { 0 };
+    float nextState[numNodes] = { 0 };
+
 private:
+
     float sampleRate = getSampleRate();
 
     float length = 0.6477;
@@ -89,12 +101,11 @@ private:
     float stiffness = 0.0005;
 
     float dt = 1.0 / sampleRate;
-    float dx = length / (N - 1);
+    float dx = length / (numNodes - 1);
 
     float c = 308;
 
-    float previousState[N] = { 0 };
-    float currentState[N] = { 0 };
-
-    float nextState[N];
+    float yElongation = 0.5;
+    float xPluck = length / 4;
+    
 };
