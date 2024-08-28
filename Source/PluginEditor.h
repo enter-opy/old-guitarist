@@ -14,7 +14,8 @@
 //==============================================================================
 /**
 */
-class OldguitaristAudioProcessorEditor  : public juce::AudioProcessorEditor
+class OldguitaristAudioProcessorEditor  : public juce::AudioProcessorEditor,
+    public Timer
 {
 public:
     OldguitaristAudioProcessorEditor (OldguitaristAudioProcessor&);
@@ -23,6 +24,8 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+
+    void timerCallback(void) override;
 
 private:
     // This reference is provided as a quick way for your editor to
